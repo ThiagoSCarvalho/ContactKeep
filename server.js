@@ -1,9 +1,13 @@
 const express = require("express");
+const connectDB = require("./config/db");
 
 const app = express();
 
+// conectar banco de dados
+connectDB();
+
 app.get("/", (req, res) => {
-	res.json({ msg: "Olá Planeta, esse é o Contact Keeper usando redux" });
+	res.json({ msg: "Olá Planeta, esse é o Contact Keeper usando redux para a uninove 2021" });
 });
 
 // rotas
