@@ -6,6 +6,10 @@ const app = express();
 // conectar banco de dados
 connectDB();
 
+// iniciar Middleware
+app.use(express.json({ extended: false }));
+
+
 app.get("/", (req, res) => {
 	res.json({ msg: "Olá Planeta, esse é o Contact Keeper usando redux para a uninove 2021" });
 });
