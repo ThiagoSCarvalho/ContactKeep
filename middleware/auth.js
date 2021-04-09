@@ -13,7 +13,9 @@ module.exports = function(req, res, next) {
 	try {
 		const decoded = jwt.verify(token, config.get("secret"));
 
+		//  Retira o ID do token que foi enviado como payload na hora de criar o token, esse id pode ser usado para fazer as buscas que eu quiser no banco de dados, toda rota que tiver acesso a este middleware, passará por verificação, será checado se o token é valido e será pego o id dentro do token
 		req.user = decoded.user;
+		
 		next();
 	} catch (err) {
 		res.status(401).json({ msg: "Token inválido" });

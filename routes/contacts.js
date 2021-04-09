@@ -2,6 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 
+const { check, validationResult } = require("express-validator");
+
+const auth = require("./../middleware/auth");
+
+const Contact = require("./../models/Contact");
+const User = require("./../models/User");
+
 // rota    -----  GET api/contacts
 // descrição ---- Pegar contatos do usuario
 // acesso ----- Privado
