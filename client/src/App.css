@@ -59,6 +59,33 @@ body,
 	width: 50%;
 }
 
+/* Customização do Materialize */
+/* inputs Materialize */
+.input-field input:focus + label {
+	color: #8e24aa !important;
+}
+
+.row .input-field input:focus {
+	border-bottom: 1px solid #8e24aa !important;
+	box-shadow: 0 1px 0 0 #8e24aa !important;
+}
+
+.input-field input[type].valid,
+.input-field input[type].valid:focus,
+.input-field textarea.valid,
+.input-field textarea.valid:focus {
+	border-bottom: 1px solid #4a148c;
+	box-shadow: 0 1px 0 0 #4a148c;
+}
+
+.input-field input[type].invalid,
+.input-field input[type].invalid:focus,
+.input-field textarea.invalid,
+.input-field textarea.invalid:focus {
+	border-bottom: 1px solid #d50000;
+	box-shadow: 0 1px 0 0 #d50000;
+}
+
 @media (max-width: 700px) {
 	.custom-container {
 		width: 80%;
