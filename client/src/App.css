@@ -7,14 +7,24 @@
 }
 
 html,
-body {
+body,
+.App {
 	min-height: 100vh;
 	font-family: "Roboto", sans-serif;
 	overflow-x: hidden;
+	background: #fafafa;
 }
 
+/* navbar */
+.brand-logo {
+	margin-left: 10px;
+}
+
+/* main content */
 .home-layout {
-	min-height: 90vh;
+	min-height: 100vh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
 }
 
 /* footer */
@@ -35,4 +45,22 @@ body {
 	flex-direction: column;
 	justify-content: flex-end;
 	min-height: 10vh;
+}
+
+/* outros */
+
+.flex-xy-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.custom-container {
+	width: 50%;
+}
+
+@media (max-width: 700px) {
+	.custom-container {
+		width: 80%;
+	}
 }

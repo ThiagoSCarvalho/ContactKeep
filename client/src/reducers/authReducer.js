@@ -6,9 +6,12 @@ const initialState = {
 	error: null
 };
 
-export default (state = initialState, action) => {
+
+let actionState =  (state = initialState, action) => {
 	switch (action.type) {
 		default:
 			return state;
 	}
 };
+
+export default actionState
