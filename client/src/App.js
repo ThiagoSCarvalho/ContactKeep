@@ -22,8 +22,8 @@ function App() {
 	});
 
 	return (
-		<BrowserRouter>
-			<Provider store={store}>
+		<Provider store={store}>
+			<BrowserRouter>
 				<div className="App">
 					<div className="home-layout">
 						<NavBar />
@@ -41,8 +41,8 @@ function App() {
 						<Footer />
 					</div>
 				</div>
-			</Provider>
-		</BrowserRouter>
+				</BrowserRouter>
+		</Provider>
 	);
 }
 

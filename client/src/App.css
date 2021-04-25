@@ -59,6 +59,17 @@ body,
 	width: 50%;
 }
 
+
+.toast-error {
+	background-color: #b71c1c;
+	color: #fafafa;
+}
+
+.toast-success {
+	background-color: #004d40;
+	color: #fafafa;
+}
+
 /* Customização do Materialize */
 /* inputs Materialize */
 .input-field input:focus + label {
