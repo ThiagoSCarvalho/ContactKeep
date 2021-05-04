@@ -8,12 +8,33 @@ import {
 	FILTER_CONTACT,
 	CLEAR_FILTER,
 	CONTACT_ERROR,
-	SET_LOADING,
-	CLEAR_ERRORS
+	CONTACT_LOADING
 } from "./types";
 
-// buscar contatos
+// buscar contatos paginado
+export const getPaginatedContacts = (page, perPage) => async dispatch => {
+	try {
+		const token = localStorage.getItem("token");
+		const res = await fetch(`api/contacts/?page=${page}&perPage=${perPage}`, {
+			headers: {
+				"x-auth-token": token
+			}
+		});
 
+		const data = await res.json();
+
+		dispatch({
+			type: GET_CONTACTS,
+			payload: data
+		});
+	} catch (err) {
+		console.err(err);
+		dispatch({
+			type: CONTACT_ERROR,
+			payload: err.msg
+		});
+	}
+};
 // add contato
 
 // deletar contato
@@ -25,3 +46,8 @@ import {
 // filtrar contato
 
 // loading
+export const setLoading = () => {
+	return {
+		type: CONTACT_LOADING
+	};
+};

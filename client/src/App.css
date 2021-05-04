@@ -55,6 +55,18 @@ body,
 	min-height: 10vh;
 }
 
+/* contatos */
+
+.btn-edit,
+.btn-delete {
+	cursor: pointer;
+}
+
+i.btn-edit:hover,
+i.btn-delete:hover {
+	opacity: 0.8 !important;
+}
+
 /* margins / padding */
 
 .my-1 {
