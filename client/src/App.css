@@ -63,6 +63,9 @@ body,
 }
 
 /* outros */
+.icon-bigger {
+	font-size: 2.5rem;
+}	
 
 .bg-primary {
 	background-color: var(--primary-color);
@@ -77,6 +80,7 @@ body,
 
 .custom-container {
 	width: 50%;
+	margin: 0 auto;
 }
 
 .toast-error {
@@ -114,6 +118,11 @@ body,
 .input-field textarea.invalid:focus {
 	border-bottom: 1px solid var(--primary-red);
 	box-shadow: 0 1px 0 0 var(--primary-red);
+}
+
+/* icon materialize ativo */
+.material-icons.prefix.active {
+	color: var(--secondary-color);
 }
 
 @media (max-width: 700px) {

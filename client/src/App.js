@@ -8,6 +8,8 @@ import Footer from "./components/Layout/Footer";
 import Register from "./components/user/Register";
 import Login from "./components/user/Login";
 
+import Contacts from "./components/contacts/Contacts";
+
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
 
@@ -31,11 +33,14 @@ function App() {
 							<Route exact path="/">
 								<HomeContent />
 							</Route>
-							<Route exact path="/register">
-								<Register />
+							<Route exact path="/contacts">
+								<Contacts />
 							</Route>
 							<Route exact path="/login">
 								<Login />
+							</Route>
+							<Route exact path="/register">
+								<Register />
 							</Route>
 						</Switch>
 						<Footer />
