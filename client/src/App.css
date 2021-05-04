@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
+:root {
+	--primary-color: #4a148c;
+	--secondary-color: #8e24aa;
+	--primary-white: #fafafa;
+	--primary-red: #d50000;
+	--secondary-red: #b71c1c;
+}
+
 * {
 	padding: 0;
 	margin: 0;
@@ -12,7 +20,7 @@ body,
 	min-height: 100vh;
 	font-family: "Roboto", sans-serif;
 	overflow-x: hidden;
-	background: #fafafa;
+	background: var(--primary-white);
 }
 
 /* navbar */
@@ -47,7 +55,19 @@ body,
 	min-height: 10vh;
 }
 
+/* margins / padding */
+
+.my-1 {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
 /* outros */
+
+.bg-primary {
+	background-color: var(--primary-color);
+	color: var(--primary-white);
+}
 
 .flex-xy-center {
 	display: flex;
@@ -59,42 +79,41 @@ body,
 	width: 50%;
 }
 
-
 .toast-error {
-	background-color: #b71c1c;
-	color: #fafafa;
+	background-color: var(--secondary-red);
+	color: var(--primary-white);
 }
 
 .toast-success {
-	background-color: #004d40;
-	color: #fafafa;
+	background-color: var(--primary-color);
+	color: var(--primary-white);
 }
 
 /* Customização do Materialize */
 /* inputs Materialize */
 .input-field input:focus + label {
-	color: #8e24aa !important;
+	color: var(--secondary-color) !important;
 }
 
 .row .input-field input:focus {
-	border-bottom: 1px solid #8e24aa !important;
-	box-shadow: 0 1px 0 0 #8e24aa !important;
+	border-bottom: 1px solid var(--secondary-color) !important;
+	box-shadow: 0 1px 0 0 var(--secondary-color) !important;
 }
 
 .input-field input[type].valid,
 .input-field input[type].valid:focus,
 .input-field textarea.valid,
 .input-field textarea.valid:focus {
-	border-bottom: 1px solid #4a148c;
-	box-shadow: 0 1px 0 0 #4a148c;
+	border-bottom: 1px solid var(--secondary-color);
+	box-shadow: 0 1px 0 0 var(--secondary-color) c;
 }
 
 .input-field input[type].invalid,
 .input-field input[type].invalid:focus,
 .input-field textarea.invalid,
 .input-field textarea.invalid:focus {
-	border-bottom: 1px solid #d50000;
-	box-shadow: 0 1px 0 0 #d50000;
+	border-bottom: 1px solid var(--primary-red);
+	box-shadow: 0 1px 0 0 var(--primary-red);
 }
 
 @media (max-width: 700px) {

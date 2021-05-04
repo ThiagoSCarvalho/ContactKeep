@@ -31,6 +31,14 @@ let actionState =  (state = initialState, action) => {
 				error: null
 			};
 
+		case LOAD_USER:
+			return {
+				...state,
+				user: action.payload
+			};
+
+		case LOGIN_FAIL:
+		case AUTH_ERROR:
 		case REGISTER_FAIL:
 			localStorage.removeItem("token");
 			return {
@@ -46,6 +54,12 @@ let actionState =  (state = initialState, action) => {
 			return {
 				...state,
 				loading: true
+			};
+		
+		case CLEAR_ERRORS:
+			return {
+				...state,
+				error: null
 			};
 
 		default:

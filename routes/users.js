@@ -19,7 +19,7 @@ router.post(
 		check("name", "Por favor digite o nome")
 			.not()
 			.isEmpty(),
-		check("email", "Por inclua um email válido").isEmail(),
+		check("email", "Por favor inclua um email válido").isEmail(),
 		check(
 			"password",
 			"Por favor digite uma senha com 6 ou mais carácteres"
