@@ -28,13 +28,13 @@ const NavBar = () => {
 
 			<ul className="sidenav" id="mobile-demo">
 				<li>
-					<Link to="/">Home</Link>
+					<Link className="sidenav-close" to="/">Home</Link>
 				</li>
 				<li>
-					<Link to="/register">Cadastrar</Link>
+					<Link className="sidenav-close" to="/register">Cadastrar</Link>
 				</li>
 				<li>
-					<Link to="/login">Login</Link>
+					<Link className="sidenav-close" to="/login">Login</Link>
 				</li>
 			</ul>
 		</div>

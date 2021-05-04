@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import Spinner from "./../Layout/Spinner";
+
 import M from "materialize-css/dist/js/materialize.min.js";
 import PropTypes from "prop-types";
 
@@ -128,23 +130,7 @@ const Register = ({
 					</button>
 				</form>
 			</div>
-			{loading && (
-				<div className="center-align my-1">
-					<div className="preloader-wrapper big active ">
-						<div className="spinner-layer spinner-blue-only">
-							<div className="circle-clipper left">
-								<div className="circle"></div>
-							</div>
-							<div className="gap-patch">
-								<div className="circle"></div>
-							</div>
-							<div className="circle-clipper right">
-								<div className="circle"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			)}
+			{loading && <Spinner />}
 		</React.Fragment>
 	);
 };
