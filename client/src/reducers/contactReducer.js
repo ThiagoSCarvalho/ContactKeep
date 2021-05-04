@@ -1,11 +1,17 @@
-import { GET_CONTACTS, CONTACT_LOADING } from "../actions/types";
+import {
+	GET_CONTACTS,
+	CONTACT_LOADING,
+	CONTACT_ERROR,
+	GET_TOTAL_CONTACTS
+} from "../actions/types";
 
 const initialState = {
 	contacts: null,
 	currentContact: null,
 	filteredContacts: null,
-	loadingContacts: false,
-	error: null
+	loading: false,
+	error: null,
+	totalContacts: null
 };
 
 let actionState = (state = initialState, action) => {
@@ -17,6 +23,20 @@ let actionState = (state = initialState, action) => {
 				loading: false
 			};
 
+			case GET_TOTAL_CONTACTS:
+			return {
+				...state,
+				totalContacts: action.payload,
+				loading: false
+			};
+
+		case CONTACT_ERROR:
+			return {
+				...state,
+				loading: false,
+				error: action.payload
+			};
+			
 		case CONTACT_LOADING:
 			return {
 				...state,

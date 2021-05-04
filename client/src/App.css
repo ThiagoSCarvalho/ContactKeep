@@ -137,6 +137,11 @@ i.btn-delete:hover {
 	color: var(--secondary-color);
 }
 
+/* pagination botão active */
+li.active {
+	background-color: var(--secondary-color) !important;
+}
+
 @media (max-width: 700px) {
 	.custom-container {
 		width: 80%;

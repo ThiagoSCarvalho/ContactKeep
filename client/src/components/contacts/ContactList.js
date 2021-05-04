@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import Spinner from "./../Layout/Spinner";
@@ -11,7 +11,7 @@ import {
 const ContactList = ({
 	setLoading,
 	getPaginatedContacts,
-	contact: { loading, contacts }
+    contact: { loading, contacts, error }
 }) => {
 	useEffect(() => {
 		setLoading();
@@ -21,17 +21,19 @@ const ContactList = ({
 	if (loading) {
 		return <Spinner />;
 	} else {
-		if (contacts !== null && contacts.length === 0)
+		if (error !== null) {
 			return (
 				<div className="grey-text text-darken-2">
-					Não há contatos para mostrar...
+					Houve um erro ao tentar buscar dados do servidor. Tente novamente mais
+					tarde.
 				</div>
 			);
+        }
+
 		return (
 			<React.Fragment>
-				{" "}
 				<div className="row">
-					{contacts !== null &&
+                    {contacts !== null && contacts.length > 0 ? (
 						contacts.map(cont => (
 							<div className="col s12  l4 " key={cont._id}>
 								<div className="card-panel white">
@@ -54,7 +56,12 @@ const ContactList = ({
 									</span>
 								</div>
 							</div>
-						))}
+						))
+                        ) : (
+                            <div className="grey-text text-darken-2">
+                                Não há contatos para mostrar...
+                            </div>
+                        )}
 				</div>
 			</React.Fragment>
 		);

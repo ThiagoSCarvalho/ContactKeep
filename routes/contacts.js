@@ -21,10 +21,10 @@ router.get("/", auth, async (req, res) => {
 			const contacts = await Contact.find({ user: req.user.id }).sort({
 				date: -1
 			});
-			res.json(contacts);
+			return res.json(contacts);
 		} catch (err) {
 			console.error(err.message);
-			res.status(500).json({ msg: "Houve um erro no servidor" });
+			return res.status(500).json({ msg: "Houve um erro no servidor" });
 		}
 	}
 
@@ -36,10 +36,10 @@ router.get("/", auth, async (req, res) => {
 			.skip(page * perPage - perPage)
 			.limit(parseInt(perPage));
 
-		res.json(paginatedContacts);
+		return res.json(paginatedContacts);
 	} catch (err) {
 		console.error(err.message);
-		res.status(500).json({ msg: "Houve um erro no servidor" });
+		return res.status(500).json({ msg: "Houve um erro no servidor" });
 	}
 });
 
