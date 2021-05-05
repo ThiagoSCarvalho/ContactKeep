@@ -11,6 +11,7 @@ export const CONTACT_ERROR = "CONTACT_ERROR";
 export const CONTACT_ERROR_CLEAR = "CONTACT_ERROR_CLEAR";
 export const CONTACT_LOADING = "CONTACT_LOADING";
 export const GET_TOTAL_CONTACTS = "GET_TOTAL_CONTACTS";
+export const SET_PAGE = "SET_PAGE";
 
 // auth
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

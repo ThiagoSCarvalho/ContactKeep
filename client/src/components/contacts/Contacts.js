@@ -3,6 +3,8 @@ import React from "react";
 import ContactList from "./ContactList";
 import Pagination from "./Pagination";
 
+import AddContact from "./../modals/AddContact";
+
 const Contacts = () => {
 	return (
 		<div className="center container">
@@ -21,10 +23,11 @@ const Contacts = () => {
 			</div>
 			{/* criar componente para cada contato depois */}
 
+			<AddContact />
 			<ContactList />
             <Pagination />
 
-			<div className="fixed-action-btn">
+			<div className="fixed-action-btn modal-trigger" href="#add-contact-modal">
 				<a href="#!" className="btn-floating btn-large red">
 					<i className="large material-icons white-text ">add</i>
 				</a>

@@ -2,7 +2,10 @@ import {
 	GET_CONTACTS,
 	CONTACT_LOADING,
 	CONTACT_ERROR,
-	GET_TOTAL_CONTACTS
+	GET_TOTAL_CONTACTS,
+	ADD_CONTACT,
+	DELETE_CONTACT,
+	SET_PAGE
 } from "../actions/types";
 
 const initialState = {
@@ -11,7 +14,8 @@ const initialState = {
 	filteredContacts: null,
 	loading: false,
 	error: null,
-	totalContacts: null
+	totalContacts: null,
+	page: 1
 };
 
 let actionState = (state = initialState, action) => {
@@ -21,6 +25,17 @@ let actionState = (state = initialState, action) => {
 				...state,
 				contacts: action.payload,
 				loading: false
+			};
+
+		case ADD_CONTACT:
+			return {
+				...state,
+				loading: false
+			};
+		case DELETE_CONTACT:
+			return {
+				...state,
+				contacts: state.contacts.filter(con => con._id !== action.payload)
 			};
 
 			case GET_TOTAL_CONTACTS:
@@ -36,7 +51,13 @@ let actionState = (state = initialState, action) => {
 				loading: false,
 				error: action.payload
 			};
-			
+
+		case SET_PAGE:
+			return {
+				...state,
+				page: action.payload
+			};
+	
 		case CONTACT_LOADING:
 			return {
 				...state,

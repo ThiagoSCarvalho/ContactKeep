@@ -5,21 +5,23 @@ import { connect } from "react-redux";
 import {
 	setLoading,
 	getTotalContacts,
-	getPaginatedContacts
+	getPaginatedContacts,
+	setPage
 } from "./../../actions/contactActions";
 
 const Pagination = ({
 	setLoading,
 	getTotalContacts,
 	getPaginatedContacts,
-	contact: { error, loading, totalContacts }
+	setPage,
+	contact: { totalContacts, page }
 }) => {
 	useEffect(() => {
 		setLoading();
 		getTotalContacts();
 	}, []);
 
-	const [page, setPage] = useState(1);
+
 	const [perPage, setPerPage] = useState(6);
 	let totalPages = Math.ceil(totalContacts / perPage);
 
@@ -27,34 +29,35 @@ const Pagination = ({
 		console.log(toPage);
 		setPage(toPage);
 		getPaginatedContacts(toPage, perPage);
+		getTotalContacts();
 	};
 
 	return (
-		<ul class="pagination">
+		<ul className="pagination">
 			<li
-				className={page === 1 ? "disabled" : "waves-effect"}
+				classNameName={page === 1 ? "disabled" : "waves-effect"}
 				onClick={() => changePage(1)}
 			>
 				<a href="#!">
-					<i class="material-icons">chevron_left</i>
+					<i className="material-icons">chevron_left</i>
 				</a>
 			</li>
 			{page > 1 && (
-				<li class="" onClick={() => changePage(page - 1)}>
+				<li className="" onClick={() => changePage(page - 1)}>
 					<a href="#!"> {page - 1}</a>
 				</li>
 			)}
-			<li class="active">
+			<li className="active">
 				<a href="#!"> {page}</a>
 			</li>
 			{page < totalPages && (
-				<li class="waves-effect" onClick={() => changePage(page + 1)}>
+				<li className="waves-effect" onClick={() => changePage(page + 1)}>
 					<a href="#!">{page + 1}</a>
 				</li>
 			)}
 
 			{page + 1 < totalPages && (
-				<li class="waves-effect" onClick={() => changePage(page + 2)}>
+				<li className="waves-effect" onClick={() => changePage(page + 2)}>
 					<a href="#!">{page + 2}</a>
 				</li>
 			)}
@@ -64,7 +67,7 @@ const Pagination = ({
 				onClick={() => changePage(totalPages)}
 			>
 				<a href="#!">
-					<i class="material-icons">chevron_right</i>
+					<i className="material-icons">chevron_right</i>
 				</a>
 			</li>
 		</ul>
@@ -78,5 +81,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
 	setLoading,
 	getTotalContacts,
-	getPaginatedContacts
+	getPaginatedContacts,
+	setPage
 })(Pagination);

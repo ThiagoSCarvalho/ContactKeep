@@ -9,11 +9,15 @@ import {
 	CLEAR_FILTER,
 	CONTACT_ERROR,
 	CONTACT_LOADING,
-	GET_TOTAL_CONTACTS
+	GET_TOTAL_CONTACTS,
+	SET_PAGE
 } from "./types";
 
 // buscar contatos paginado
-export const getPaginatedContacts = (page, perPage) => async dispatch => {
+export const getPaginatedContacts = (
+	page = 1,
+	perPage = 6
+) => async dispatch => {
 	try {
 		const token = localStorage.getItem("token");
 		const res = await fetch(`api/contacts/?page=${page}&perPage=${perPage}`, {
@@ -70,9 +74,66 @@ export const getTotalContacts = () => async dispatch => {
 	}
 };
 
-// add contato
+// add contato]
+
+export const addContact = formData => async dispatch => {
+	try {
+		const token = localStorage.getItem("token");
+
+		const res = await fetch("api/contacts", {
+			method: "POST",
+			headers: {
+				"x-auth-token": token,
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(formData)
+		});
+
+		if (res.ok) {
+			dispatch({
+				type: ADD_CONTACT
+			});
+		} else {
+			const error = await res.json();
+			dispatch({
+				type: CONTACT_ERROR,
+				payload: error
+			});
+		}
+	} catch (error) {
+		console.error(error);
+		dispatch({
+			type: CONTACT_ERROR,
+			payload: error
+		});
+	}
+};
 
 // deletar contato
+
+export const deleteContact = id => async dispatch => {
+	try {
+		const token = localStorage.getItem("token");
+
+		await fetch(`api/contacts/${id}`, {
+			method: "DELETE",
+			headers: {
+				"x-auth-token": token
+			}
+		});
+
+		dispatch({
+			type: DELETE_CONTACT,
+			payload: id
+		});
+	} catch (error) {
+		console.error(error);
+		dispatch({
+			type: CONTACT_ERROR,
+			payload: error
+		});
+	}
+};
 
 // atualizar contato
 
@@ -84,5 +145,14 @@ export const getTotalContacts = () => async dispatch => {
 export const setLoading = () => {
 	return {
 		type: CONTACT_LOADING
+	};
+};
+
+// seta pagina atual
+
+export const setPage = page => {
+	return {
+		type: SET_PAGE,
+		payload: page
 	};
 };
