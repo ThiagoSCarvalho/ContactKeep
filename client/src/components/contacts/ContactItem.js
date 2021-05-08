@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 import {
 	deleteContact,
 	getTotalContacts,
-	getPaginatedContacts
+	getPaginatedContacts,
+	setCurrentContact
 } from "./../../actions/contactActions";
 
 const ContactItem = ({
@@ -15,9 +16,11 @@ const ContactItem = ({
 	deleteContact,
 	getTotalContacts,
 	getPaginatedContacts,
+	setCurrentContact,
 	contact: { page }
 }) => {
 	const onDelete = () => {
+		console.log(cont._id);
 		if (window.confirm("Tem certeza que deseja excluir este contato?")) {
 			deleteContact(cont._id);
 			getTotalContacts();
@@ -32,7 +35,11 @@ const ContactItem = ({
 				<span className="grey-text text-darken-2">
 					<div className="row">
 						<div className="col s12 right-align">
-							<i className="material-icons icon-bigger indigo-text darken-4 btn-edit">
+							<i
+								className="material-icons icon-bigger indigo-text darken-4 btn-edit modal-trigger"
+								href="#edit-contact-modal"
+								onClick={() => setCurrentContact(cont)}
+							>
 								edit
 							</i>
 							<i
@@ -61,5 +68,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
 	deleteContact,
 	getTotalContacts,
-	getPaginatedContacts
+	getPaginatedContacts,
+	setCurrentContact
 })(ContactItem);
