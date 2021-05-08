@@ -34,7 +34,9 @@ export default (state = initialState, action) => {
 		case LOAD_USER:
 			return {
 				...state,
-				user: action.payload
+				user: action.payload,
+				isAuthenticated: true,
+				loading: false
 			};
 		case LOGIN_FAIL:
 		case AUTH_ERROR:
@@ -60,6 +62,13 @@ export default (state = initialState, action) => {
 				error: null
 			};
 
+		case LOGOUT:
+			return {
+				...state,
+				token: null,
+				isAuthenticated: false,
+				user: null
+			};
 		default:
 			return state;
 	}

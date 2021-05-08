@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import PrivateRoute from "./components/routing/PrivateRoute";
+
 import HomeContent from "./components/Layout/HomeContent";
 import NavBar from "./components/Layout/NavBar";
 import Footer from "./components/Layout/Footer";
@@ -21,7 +23,7 @@ import "./App.css";
 function App() {
 	useEffect(() => {
 		M.AutoInit();
-	});
+	}, []);
 
 	return (
 		<Provider store={store}>
@@ -33,9 +35,7 @@ function App() {
 							<Route exact path="/">
 								<HomeContent />
 							</Route>
-							<Route exact path="/contacts">
-								<Contacts />
-							</Route>
+							<PrivateRoute exact path="/contacts" component={Contacts} />
 							<Route exact path="/login">
 								<Login />
 							</Route>

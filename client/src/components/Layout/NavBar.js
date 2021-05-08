@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+import { connect } from "react-redux";
+
+import { logout } from "./../../actions/authActions";
+
+const NavBar = ({ logout, auth: { isAuthenticated } }) => {
 	return (
 		<div>
 			<nav className="nav-extended deep-purple darken-2 ">
@@ -17,10 +21,20 @@ const NavBar = () => {
 							<Link to="/">Home</Link>
 						</li>
 						<li>
-							<Link to="/register">Cadastrar</Link>
+							{isAuthenticated ? (
+								<Link to="/contacts">Contatos</Link>
+							) : (
+								<Link to="/register">Cadastrar</Link>
+							)}
 						</li>
 						<li>
-							<Link to="/login">Login</Link>
+							{isAuthenticated ? (
+								<Link to="/" onClick={logout}>
+									Logout
+								</Link>
+							) : (
+								<Link to="/login">Login</Link>
+							)}
 						</li>
 					</ul>
 				</div>
@@ -31,14 +45,34 @@ const NavBar = () => {
 					<Link className="sidenav-close" to="/">Home</Link>
 				</li>
 				<li>
-					<Link className="sidenav-close" to="/register">Cadastrar</Link>
+					{isAuthenticated ? (
+						<Link className="sidenav-close" to="/contacts">
+							Contatos
+						</Link>
+					) : (
+						<Link className="sidenav-close" to="/register">
+							Cadastrar
+						</Link>
+					)}
 				</li>
 				<li>
-					<Link className="sidenav-close" to="/login">Login</Link>
+					{isAuthenticated ? (
+						<Link className="sidenav-close" to="/" onClick={logout}>
+							Logout
+						</Link>
+					) : (
+						<Link className="sidenav-close" to="/login">
+							Login
+						</Link>
+					)}
 				</li>
 			</ul>
 		</div>
 	);
 };
 
-export default NavBar;
+const mapStateToProps = state => ({
+	auth: state.auth
+});
+
+export default connect(mapStateToProps, { logout })(NavBar);

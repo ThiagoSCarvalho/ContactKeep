@@ -110,12 +110,14 @@ export const setLoggedInUser = () => async dispatch => {
 			}
 		});
 
-		const data = await res.json();
+		if (res.ok) {
+			const data = await res.json();
 
-		dispatch({
-			type: LOAD_USER,
-			payload: data
-		});
+			dispatch({
+				type: LOAD_USER,
+				payload: data
+			});
+		}
 	} catch (err) {
 		console.error(err);
 		dispatch({
@@ -126,6 +128,12 @@ export const setLoggedInUser = () => async dispatch => {
 };
 
 // logout
+export const logout = () => {
+	localStorage.removeItem("token");
+	return {
+		type: LOGOUT
+	};
+};
 
 // loading
 export const setLoading = () => {

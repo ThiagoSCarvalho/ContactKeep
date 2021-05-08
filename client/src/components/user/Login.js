@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 
+import { Redirect } from "react-router-dom";
+
 import Spinner from "./../Layout/Spinner";
 
 import { connect } from "react-redux";
@@ -17,10 +19,12 @@ const Login = ({
 	clearErrors,
 	setLoggedInUser,
 	setLoading,
-	auth: { loading, error }
+	auth: { loading, error, isAuthenticated }
 }) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+
+	const [visibility, setVisibility] = useState(false);
 
 	useEffect(() => {
 		if (error !== null) {
@@ -39,6 +43,12 @@ const Login = ({
 		// eslint-disable-next-line
 	}, [error]);
 
+	useEffect(() => {
+		setTimeout(() => {
+			setVisibility(true);
+		}, 100);
+	}, []);
+
 	const login = ev => {
 		ev.preventDefault();
 
@@ -56,9 +66,17 @@ const Login = ({
 		}
 	};
 
+	if (isAuthenticated) {
+		return <Redirect to="/contacts" />;
+	}
+
 	return (
 		<React.Fragment>
-			<div className="flex-xy-center row custom-container">
+			<div
+				className={`flex-xy-center  row custom-container ${
+					visibility ? "fade-enter-active" : "fade-enter"
+				}`}
+			>
 				<form className="col s12">
 					<h2 className="center">Login</h2>
 					<div className="row">

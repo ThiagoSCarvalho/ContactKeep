@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import Spinner from "./../Layout/Spinner";
 
+import { Redirect } from "react-router-dom";
+
 import M from "materialize-css/dist/js/materialize.min.js";
 import PropTypes from "prop-types";
 
@@ -18,12 +20,14 @@ const Register = ({
 	setLoading,
 	clearErrors,
 	setLoggedInUser,
-	auth: { loading, error }
+	auth: { loading, error, isAuthenticated }
 }) => {
 	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [email, setEmail] = useState("");
+
+	const [visibility, setVisibility] = useState(false);
 
 	useEffect(() => {
 		if (error !== null) {
@@ -39,7 +43,14 @@ const Register = ({
 				clearErrors();
 			}
 		}
+		// eslint-disable-next-line
 	}, [error]);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setVisibility(true);
+		}, 100);
+	}, []);
 
 	const onSubmit = ev => {
 		ev.preventDefault();
@@ -55,20 +66,24 @@ const Register = ({
 				classes: "toast-error"
 			});
 		} else {
-			setLoading();
 			const formData = { name, password, email };
-			// registerUser(formData);
-			// setLoggedInUser();
+			setLoading();
 
 			registerUser(formData).then(() => setLoggedInUser());
 		}
 	};
 
-	const wait = () => new Promise(resolve => {});
+	if (isAuthenticated) {
+		return <Redirect to="/contacts" />;
+	}
 
 	return (
 		<React.Fragment>
-			<div className="flex-xy-center row custom-container">
+			<div
+				className={`flex-xy-center  row custom-container ${
+					visibility ? "fade-enter-active" : "fade-enter"
+				}`}
+			>
 				<form className="col s12">
 					<h2 className="center">Cadastro</h2>
 					<div className="row">
@@ -135,7 +150,6 @@ const Register = ({
 	);
 };
 
-
 Register.propTypes = {
 	registerUser: PropTypes.func.isRequired,
 	setLoading: PropTypes.func.isRequired,
@@ -152,5 +166,4 @@ export default connect(mapStateToProps, {
 	setLoading,
 	clearErrors,
 	setLoggedInUser
-	
 })(Register);
