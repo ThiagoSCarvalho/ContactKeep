@@ -1,6 +1,5 @@
-"# ContactKeep" 
 # Como instalar
-``` Antes de iniciar, você precisa ter o mongoDB configurado em sua máquina ou no mongoDB Atlas  ``` 
+``` Antes de iniciar, você precisa ter o mongoDB configurado em sua máquina  ``` 
 
 - Baixe ou clone esta aplicação;
 - Pelo terminal, acesse a pasta raíz do projeto e digite: ` npm i `
@@ -38,3 +37,14 @@ module.exports = connectDB;
 }
 
 ```
+- Após isso, no terminal, digite: ` npm run dev `
+
+
+
+## Tecnologias utilizadas
+- MongoDB;
+- Node.js;
+- Express.js;
+- React;
+- Redux
+- Materialize.css
