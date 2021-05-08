@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import Spinner from "./../Layout/Spinner";
 import ContactItem from "./ContactItem";
 
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 import {
 	setLoading,
 	getPaginatedContacts
@@ -12,12 +14,12 @@ import {
 const ContactList = ({
 	setLoading,
 	getPaginatedContacts,
-    contact: { loading, contacts, error }
+	contact: { loading, contacts, error, filteredContacts }
 }) => {
 	useEffect(() => {
 		setLoading();
 		getPaginatedContacts(1, 6);
-		
+		// eslint-disable-next-line
 	}, []);
 
 	if (loading) {
@@ -30,20 +32,50 @@ const ContactList = ({
 					tarde.
 				</div>
 			);
-        }
+		}
+
+		if (filteredContacts !== null) {
+			return filteredContacts.length > 0 ? (
+				<div className="row">
+					<TransitionGroup>
+						{filteredContacts.map(cont => (
+							<CSSTransition
+								key={cont._id}
+								timeout={{ enter: 350 }}
+								classNames="fade"
+							>
+								<ContactItem cont={cont} />
+							</CSSTransition>
+						))}
+					</TransitionGroup>
+				</div>
+			) : (
+				<div className="grey-text text-darken-2">
+					Não teve resultado para sua busca...
+				</div>
+			);
+		}
 
 		return (
-			<React.Fragment>
-				<div className="row">
-                    {contacts !== null && contacts.length > 0 ? (
-						contacts.map(cont => <ContactItem cont={cont} key={cont._id} />)
-                        ) : (
-                            <div className="grey-text text-darken-2">
-                                Não há contatos para mostrar...
-                            </div>
-                        )}
-				</div>
-			</React.Fragment>
+			<div className="row">
+				{contacts !== null && contacts.length > 0 ? (
+					<TransitionGroup>
+						{contacts.map(cont => (
+							<CSSTransition
+								classNames="fade"
+								timeout={{ enter: 350 }}
+								key={cont._id}
+							>
+								<ContactItem cont={cont} />
+							</CSSTransition>
+						))}
+					</TransitionGroup>
+				) : (
+					<div className="grey-text text-darken-2">
+						Não há contatos para mostrar...
+					</div>
+				)}
+			</div>
 		);
 	}
 };

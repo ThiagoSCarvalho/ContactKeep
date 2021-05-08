@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const HomeContent = () => {
+	const [visibility, setVisibility] = useState(false);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setVisibility(true);
+		}, 100);
+	}, []);
+
 	return (
-		<section className="flex-xy-center">
+		<section
+			className={`flex-xy-center ${
+				visibility ? "fade-enter-active" : "fade-enter"
+			}`}
+		>
 			<div>
 				<h1 className="header center grey-text text-darken-4">
 					Contact Keeper

@@ -18,9 +18,10 @@ const Pagination = ({
 }) => {
 	useEffect(() => {
 		setLoading();
+		getPaginatedContacts();
 		getTotalContacts();
+		// eslint-disable-next-line
 	}, []);
-
 
 	const [perPage, setPerPage] = useState(6);
 	let totalPages = Math.ceil(totalContacts / perPage);
@@ -35,7 +36,7 @@ const Pagination = ({
 	return (
 		<ul className="pagination">
 			<li
-				classNameName={page === 1 ? "disabled" : "waves-effect"}
+				className={page === 1 ? "disabled" : "waves-effect"}
 				onClick={() => changePage(1)}
 			>
 				<a href="#!">

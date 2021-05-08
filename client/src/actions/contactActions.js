@@ -11,7 +11,8 @@ import {
 	CONTACT_LOADING,
 	GET_TOTAL_CONTACTS,
 	SET_PAGE,
-	SET_LOADING
+	SET_LOADING,
+	CLEAR_ERRORS
 } from "./types";
 import { FloatingActionButton } from "materialize-css";
 
@@ -76,7 +77,7 @@ export const getTotalContacts = () => async dispatch => {
 	}
 };
 
-// add contato]
+// add contato
 
 export const addContact = formData => async dispatch => {
 	try {
@@ -175,6 +176,42 @@ export const setCurrentContact = contact => {
 };
 
 // filtrar contato
+export const filterContacts = text => async dispatch => {
+	try {
+		const token = localStorage.getItem("token");
+		const res = await fetch("api/contacts", {
+			headers: {
+				"x-auth-token": token
+			}
+		});
+
+		const data = await res.json();
+
+		const regex = new RegExp(`${text}`, "gi");
+
+		const filtered = data.filter(
+			contact => contact.name.match(regex) || contact.phone.match(regex)
+		);
+
+		dispatch({
+			type: FILTER_CONTACT,
+			payload: filtered
+		});
+	} catch (error) {
+		console.error(error);
+		dispatch({
+			type: CONTACT_ERROR,
+			payload: error
+		});
+	}
+};
+
+// limpa contatos filtrados
+export const clearFilter = () => {
+	return {
+		type: CLEAR_FILTER
+	};
+};
 
 // loading
 export const setLoading = () => {

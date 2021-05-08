@@ -7,7 +7,9 @@ import {
 	DELETE_CONTACT,
 	SET_PAGE,
 	UPDATE_CONTACT,
-	SET_CURRENT
+	SET_CURRENT,
+	CLEAR_FILTER,
+	FILTER_CONTACT
 } from "../actions/types";
 
 const initialState = {
@@ -20,7 +22,7 @@ const initialState = {
 	page: 1
 };
 
-let actionState = (state = initialState, action) => {
+export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_CONTACTS:
 			return {
@@ -37,16 +39,26 @@ let actionState = (state = initialState, action) => {
 		case DELETE_CONTACT:
 			return {
 				...state,
-				contacts: state.contacts.filter(con => con._id !== action.payload)
+				contacts: state.contacts.filter(con => con._id !== action.payload),
+				filteredContacts:
+					state.filteredContacts === null
+						? null
+						: state.filteredContacts.filter(con => con._id !== action.payload)
 			};
 
-			case UPDATE_CONTACT:
+		case UPDATE_CONTACT:
 			return {
 				...state,
 				loading: false,
 				contacts: state.contacts.map(con =>
 					con._id === action.payload._id ? action.payload : con
-				)
+				),
+				filteredContacts:
+					state.filteredContacts === null
+						? null
+						: state.filteredContacts.map(con =>
+								con._id === action.payload._id ? action.payload : con
+						  )
 			};
 
 		case SET_CURRENT:
@@ -55,10 +67,24 @@ let actionState = (state = initialState, action) => {
 				currentContact: action.payload
 			};
 
-			case GET_TOTAL_CONTACTS:
+		case GET_TOTAL_CONTACTS:
 			return {
 				...state,
 				totalContacts: action.payload,
+				loading: false
+			};
+
+		case FILTER_CONTACT:
+			return {
+				...state,
+				filteredContacts: action.payload,
+				loading: false
+			};
+
+		case CLEAR_FILTER:
+			return {
+				...state,
+				filteredContacts: null,
 				loading: false
 			};
 
@@ -74,7 +100,7 @@ let actionState = (state = initialState, action) => {
 				...state,
 				page: action.payload
 			};
-	
+
 		case CONTACT_LOADING:
 			return {
 				...state,
@@ -84,5 +110,3 @@ let actionState = (state = initialState, action) => {
 			return state;
 	}
 };
-
-export default actionState

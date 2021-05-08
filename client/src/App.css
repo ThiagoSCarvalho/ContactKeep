@@ -142,6 +142,25 @@ li.active {
 	background-color: var(--secondary-color) !important;
 }
 
+/* animação*/
+.fade-enter {
+	opacity: 0;
+}
+.fade-enter-active {
+	opacity: 1;
+	transition: opacity 350ms ease-in;
+}
+.fade-exit {
+	opacity: 1;
+}
+.fade-exit-active {
+	opacity: 0;
+	/* transition: opacity 50ms ease-in; */
+}
+
+
+
+
 @media (max-width: 700px) {
 	.custom-container {
 		width: 80%;

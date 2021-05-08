@@ -18,9 +18,9 @@ const initialState = {
 	error: null
 };
 
-
-let actionState =  (state = initialState, action) => {
+export default (state = initialState, action) => {
 	switch (action.type) {
+		case LOGIN_SUCCESS:
 		case REGISTER_SUCCESS:
 			localStorage.setItem("token", action.payload.token);
 			return {
@@ -36,7 +36,6 @@ let actionState =  (state = initialState, action) => {
 				...state,
 				user: action.payload
 			};
-
 		case LOGIN_FAIL:
 		case AUTH_ERROR:
 		case REGISTER_FAIL:
@@ -55,7 +54,6 @@ let actionState =  (state = initialState, action) => {
 				...state,
 				loading: true
 			};
-		
 		case CLEAR_ERRORS:
 			return {
 				...state,
@@ -66,5 +64,3 @@ let actionState =  (state = initialState, action) => {
 			return state;
 	}
 };
-
-export default actionState
