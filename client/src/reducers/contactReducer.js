@@ -5,7 +5,9 @@ import {
 	GET_TOTAL_CONTACTS,
 	ADD_CONTACT,
 	DELETE_CONTACT,
-	SET_PAGE
+	SET_PAGE,
+	UPDATE_CONTACT,
+	SET_CURRENT
 } from "../actions/types";
 
 const initialState = {
@@ -36,6 +38,21 @@ let actionState = (state = initialState, action) => {
 			return {
 				...state,
 				contacts: state.contacts.filter(con => con._id !== action.payload)
+			};
+
+			case UPDATE_CONTACT:
+			return {
+				...state,
+				loading: false,
+				contacts: state.contacts.map(con =>
+					con._id === action.payload._id ? action.payload : con
+				)
+			};
+
+		case SET_CURRENT:
+			return {
+				...state,
+				currentContact: action.payload
 			};
 
 			case GET_TOTAL_CONTACTS:

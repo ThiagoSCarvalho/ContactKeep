@@ -4,6 +4,7 @@ import ContactList from "./ContactList";
 import Pagination from "./Pagination";
 
 import AddContact from "./../modals/AddContact";
+import EditContact from "./../modals/EditContact";
 
 const Contacts = () => {
 	return (

@@ -17,6 +17,7 @@ const ContactList = ({
 	useEffect(() => {
 		setLoading();
 		getPaginatedContacts(1, 6);
+		
 	}, []);
 
 	if (loading) {

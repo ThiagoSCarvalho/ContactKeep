@@ -10,8 +10,10 @@ import {
 	CONTACT_ERROR,
 	CONTACT_LOADING,
 	GET_TOTAL_CONTACTS,
-	SET_PAGE
+	SET_PAGE,
+	SET_LOADING
 } from "./types";
+import { FloatingActionButton } from "materialize-css";
 
 // buscar contatos paginado
 export const getPaginatedContacts = (
@@ -136,8 +138,41 @@ export const deleteContact = id => async dispatch => {
 };
 
 // atualizar contato
+export const updateContact = contact => async dispatch => {
+	try {
+		const token = localStorage.getItem("token");
+
+		const res = await fetch(`api/contacts/${contact._id}`, {
+			method: "PUT",
+			headers: {
+				"x-auth-token": token,
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(contact)
+		});
+
+		const data = await res.json();
+
+		dispatch({
+			type: UPDATE_CONTACT,
+			payload: data
+		});
+	} catch (error) {
+		console.error(error);
+		dispatch({
+			type: CONTACT_ERROR,
+			payload: error
+		});
+	}
+};
 
 // setar contato atual
+export const setCurrentContact = contact => {
+	return {
+		type: SET_CURRENT,
+		payload: contact
+	};
+};
 
 // filtrar contato
 
